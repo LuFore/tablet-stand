@@ -11,12 +11,12 @@ make_stand(angle =70, thickness = 3, centre_mass= 3/4);
 
 
 module tablet(){
-    //used for modeling the tablet
+    //used for modeling the tablet and cleaning 
     cube([tablet_x,tablet_y, tablet_z]);
 }
 
 module stand_bottom(thickness = 3){
-     //create 'cup' at bottom of stand
+     //create main body of stand
      union(){
         cube([tablet_x/2,tablet_bottom, tablet_z+(thickness*2)]);
      cube([tablet_x/2,tablet_y/2, thickness]);
@@ -31,10 +31,10 @@ module make_stand( angle = 70, thickness = 3, centre_mass= 3/4){
     
     difference(){
         union(){
-            stand_bottom(thickness);
+            stand_bottom(thickness);//create main body
             translate([0,support_height,-support_length])
-            cube([tablet_x/2,thickness,support_length]);
+            cube([tablet_x/2,thickness,support_length]);//create back support
         }
-        translate([0, 3, 3]) tablet();
+        translate([0, thickness, thickness]) tablet();//clean up
     };
 };
